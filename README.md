@@ -23,7 +23,7 @@ use {
 ```lua
 local stack-box = require('stack-box')
 stack-box.notification({"this is a normal message"})
-stack-box.notification({"this is a error message"}, 'error')
+stack-box.notification({"this is an error message"}, 'error')
 ```
 
 ## List of Unimplemented Features:
