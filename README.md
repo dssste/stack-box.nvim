@@ -26,6 +26,14 @@ stack-box.notification({"this is a normal message"})
 stack-box.notification({"this is a error message"}, 'error')
 ```
 
+For example when you keep pressing the wrong command:
+
+```lua
+vim.keymap.set("n", "<leader>gg", function ()
+    require('stack-box').notification({"git status command remapped to <c-g>"}, 'error')
+end)
+```
+
 ## List of Unimplemented Features:
 
 - [ ] Stacking boxes automatically (it's stack-box after all!)
