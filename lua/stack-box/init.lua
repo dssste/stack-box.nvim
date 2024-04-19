@@ -6,17 +6,17 @@ function M.setup()
 		callback = function()
 			local errorMsg = vim.api.nvim_get_hl_by_name("ErrorMsg", true)
 			errorMsg.underline = false
-			vim.api.nvim_set_hl(0, "DapiErrorMsg", errorMsg)
+			vim.api.nvim_set_hl(0, "StackBoxBorderErrorMsg", errorMsg)
 			local normal = vim.api.nvim_get_hl_by_name("Normal", true)
 			normal.underline = false
-			vim.api.nvim_set_hl(0, "DapiNormal", normal)
+			vim.api.nvim_set_hl(0, "StackBoxBorderNormal", normal)
 		end
 	})
 end
 
 local border_hl_groups = {
-	error = "DapiErrorMsg",
-	info = "DapiNormal",
+	error = "StackBoxBorderErrorMsg",
+	info = "StackBoxBorderNormal",
 }
 
 local hl_groups = {
@@ -47,8 +47,8 @@ function M.notification(messages, level)
 		style = "minimal",
 		width = win_width,
 		height = win_height,
-		row = vim.api.nvim_get_option("lines") - 2,
-		col = vim.api.nvim_get_option("columns") - 4,
+		row = vim.api.nvim_get_option("lines") - 4,
+		col = vim.api.nvim_get_option("columns") - 8,
 		border = {
 			{"╭", border_hl_group},
 			{"─", border_hl_group},
