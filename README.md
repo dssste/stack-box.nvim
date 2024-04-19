@@ -21,9 +21,9 @@ use {
 ## Usage
 
 ```lua
-local stack-box = require('stack-box')
-stack-box.notification({"this is a normal message"})
-stack-box.notification({"this is an error message"}, 'error')
+local stack_box = require('stack-box')
+stack_box.notification({"this is a normal message"})
+stack_box.notification({"this is an error message"}, 'error')
 ```
 
 ## List of Unimplemented Features:
