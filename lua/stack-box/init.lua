@@ -1,17 +1,21 @@
 local M = {}
 
 function M.setup()
+	local function refresh_hl_groups()
+		local errorMsg = vim.api.nvim_get_hl_by_name("ErrorMsg", true)
+		errorMsg.underline = false
+		vim.api.nvim_set_hl(0, "StackBoxBorderErrorMsg", errorMsg)
+		local normal = vim.api.nvim_get_hl_by_name("Normal", true)
+		normal.underline = false
+		vim.api.nvim_set_hl(0, "StackBoxBorderNormal", normal)
+	end
+
 	vim.api.nvim_create_autocmd("ColorScheme", {
 		pattern = "*",
-		callback = function()
-			local errorMsg = vim.api.nvim_get_hl_by_name("ErrorMsg", true)
-			errorMsg.underline = false
-			vim.api.nvim_set_hl(0, "StackBoxBorderErrorMsg", errorMsg)
-			local normal = vim.api.nvim_get_hl_by_name("Normal", true)
-			normal.underline = false
-			vim.api.nvim_set_hl(0, "StackBoxBorderNormal", normal)
-		end
+		callback = refresh_hl_groups,
 	})
+
+	refresh_hl_groups()
 end
 
 local border_hl_groups = {
@@ -47,8 +51,8 @@ function M.notification(messages, level)
 		style = "minimal",
 		width = win_width,
 		height = win_height,
-		row = vim.api.nvim_get_option("lines") - 4,
-		col = vim.api.nvim_get_option("columns") - 8,
+		row = vim.api.nvim_get_option("lines") - 2,
+		col = vim.api.nvim_get_option("columns") - 4,
 		border = {
 			{"╭", border_hl_group},
 			{"─", border_hl_group},
