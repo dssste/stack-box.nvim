@@ -1,6 +1,6 @@
 # stack-box.nvim
 
-Shows popup boxes vscode style.
+Popup notification vscode style.
 
 ## Installation
 
@@ -21,9 +21,9 @@ use {
 ## Usage
 
 ```lua
-local stack-box = require('stack-box')
-stack-box.notification({"this is a normal message"})
-stack-box.notification({"this is a error message"}, 'error')
+local stack_box = require('stack-box')
+stack_box.notification({"this is a normal message"})
+stack_box.notification({"this is an error message"}, 'error')
 ```
 
 For example when you keep pressing the wrong command:
