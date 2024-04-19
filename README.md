@@ -1,6 +1,6 @@
 # stack-box.nvim
 
-Shows popup boxes vscode style.
+Popup notification vscode style.
 
 ## Installation
 
