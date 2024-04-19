@@ -67,6 +67,7 @@ function M.notification(messages, level)
 
 	local buf = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
+	vim.api.nvim_buf_set_name(buf, 'stack-box://' .. buf)
 	vim.api.nvim_buf_set_lines(buf, 0, -1, false, messages)
 	for i, _ in ipairs(messages) do
 		vim.api.nvim_buf_add_highlight(buf, -1, hl_groups[level], i-1, 0, -1)
