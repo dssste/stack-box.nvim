@@ -24,7 +24,7 @@ use {
 local stack_box = require("stack-box")
 stack_box.notification("this is a normal message")
 stack_box.notification({"this is a normal message", "with two lines"})
-stack_box.notification("this is an warning message", "warning")
+stack_box.notification("this is a warning message", "warning")
 stack_box.notification("this is an error message", "error")
 ```
 
