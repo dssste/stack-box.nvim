@@ -22,8 +22,10 @@ use {
 
 ```lua
 local stack_box = require('stack-box')
-stack_box.notification({"this is a normal message"})
-stack_box.notification({"this is an error message"}, 'error')
+stack_box.notification("this is a normal message")
+stack_box.notification({"this is a normal message", "with two lines"})
+stack_box.notification("this is an warning message", "warning")
+stack_box.notification("this is an error message", "error")
 ```
 
 For example when you keep pressing the wrong buttons:
@@ -40,8 +42,3 @@ And to close all boxes:
 ```lua
 require("stack-box").close_all_windows()
 ```
-
-## List of Unimplemented Features:
-
-- [ ] Allow string type in args
-- [ ] Add level 'warning'
