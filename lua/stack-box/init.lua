@@ -1,13 +1,24 @@
 local M = {}
 
+local border_hl_groups = {
+	error = "StackBoxBorderError",
+	warning = "StackBoxBorderWarning",
+	info = "StackBoxBorderNormal",
+}
+
+local hl_groups = {
+	error = "ErrorMsg",
+	warning = "WarningMsg",
+	info = "Normal",
+}
+
 function M.setup()
 	local function refresh_hl_groups()
-		local errorMsg = vim.api.nvim_get_hl_by_name("ErrorMsg", true)
-		errorMsg.underline = false
-		vim.api.nvim_set_hl(0, "StackBoxBorderErrorMsg", errorMsg)
-		local normal = vim.api.nvim_get_hl_by_name("Normal", true)
-		normal.underline = false
-		vim.api.nvim_set_hl(0, "StackBoxBorderNormal", normal)
+		for level, hl_group in pairs(hl_groups) do
+			local hl = vim.api.nvim_get_hl_by_name(hl_group, true)
+			hl.underline = false
+			vim.api.nvim_set_hl(0, border_hl_groups[level], hl)
+		end
 	end
 
 	vim.api.nvim_create_autocmd("ColorScheme", {
@@ -17,16 +28,6 @@ function M.setup()
 
 	refresh_hl_groups()
 end
-
-local border_hl_groups = {
-	error = "StackBoxBorderErrorMsg",
-	info = "StackBoxBorderNormal",
-}
-
-local hl_groups = {
-	error = "ErrorMsg",
-	info = "Normal",
-}
 
 local windows = {}
 
@@ -48,7 +49,9 @@ local function shift_windows()
 end
 
 function M.notification(messages, level)
-	level = level or "info"
+	if not hl_groups[level] then
+		level = "info"
+	end
 
 	local win_height = #messages
 	if win_height <= 0 then
