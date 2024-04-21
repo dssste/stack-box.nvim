@@ -31,6 +31,30 @@ end
 
 local windows = {}
 
+local function split_lines(line)
+	local result = {}
+	for str in string.gmatch(line, "([^\r\n]*)\r?\n?") do
+		if str ~= "" then
+			table.insert(result, str)
+		end
+	end
+	return result
+end
+
+local function prepare_messages(messages)
+	if type(messages) == "string" then
+		messages = {messages}
+	end
+
+	local result = {}
+	for _, line in pairs(messages) do
+		for _, part in pairs(split_lines(line)) do
+			table.insert(result, part)
+		end
+	end
+	return result
+end
+
 local function shift_windows()
 	local lines = vim.api.nvim_get_option("lines")
 	local offset = 0;
@@ -49,6 +73,8 @@ local function shift_windows()
 end
 
 function M.notification(messages, level)
+	messages = prepare_messages(messages)
+
 	if not hl_groups[level] then
 		level = "info"
 	end
