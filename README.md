@@ -26,7 +26,7 @@ stack_box.notification({"this is a normal message"})
 stack_box.notification({"this is an error message"}, 'error')
 ```
 
-For example when you keep pressing the wrong command:
+For example when you keep pressing the wrong buttons:
 
 ```lua
 vim.keymap.set("n", "<leader>gg", function ()
@@ -34,9 +34,14 @@ vim.keymap.set("n", "<leader>gg", function ()
 end)
 ```
 
+
+And to close all boxes:
+
+```lua
+require("stack-box").close_all_windows()
+```
+
 ## List of Unimplemented Features:
 
-- [ ] Stacking boxes automatically (it's stack-box after all!)
-- [ ] Command for actively closing boxes
 - [ ] Allow string type in args
 - [ ] Add level 'warning'
