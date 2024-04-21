@@ -28,6 +28,25 @@ local hl_groups = {
 	info = "Normal",
 }
 
+local windows = {}
+
+local function shift_windows()
+	local lines = vim.api.nvim_get_option("lines")
+	local offset = 0;
+	for i = #windows, 1, -1 do
+		local box = windows[i]
+		if vim.api.nvim_win_is_valid(box.win) then
+			local opts = vim.api.nvim_win_get_config(box.win)
+			local win_height = opts.height
+			opts.row = lines - offset - 2
+			vim.api.nvim_win_set_config(box.win, opts)
+			offset = offset + win_height + 2
+		else
+			table.remove(windows, i)
+		end
+	end
+end
+
 function M.notification(messages, level)
 	level = level or "info"
 
@@ -81,7 +100,20 @@ function M.notification(messages, level)
 			vim.api.nvim_win_close(win, true)
 		end
 	end, 3000)
+
+	table.insert(windows, {win = win, buf = buf})
+	shift_windows()
+
 	return buf, win
+end
+
+function M.close_all_windows()
+	for _, win in ipairs(windows) do
+		if vim.api.nvim_win_is_valid(win.win) then
+			vim.api.nvim_win_close(win.win, true)
+		end
+	end
+	windows = {}
 end
 
 return M
