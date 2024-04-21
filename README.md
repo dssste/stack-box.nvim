@@ -21,7 +21,7 @@ use {
 ## Usage
 
 ```lua
-local stack_box = require('stack-box')
+local stack_box = require("stack-box")
 stack_box.notification("this is a normal message")
 stack_box.notification({"this is a normal message", "with two lines"})
 stack_box.notification("this is an warning message", "warning")
@@ -32,7 +32,7 @@ For example when you keep pressing the wrong buttons:
 
 ```lua
 vim.keymap.set("n", "<leader>gg", function ()
-    require('stack-box').notification({"git status command remapped to <c-g>"}, 'error')
+    require("stack-box").notification({"git status command remapped to <c-g>"}, "error")
 end)
 ```
 
